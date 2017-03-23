@@ -3,23 +3,8 @@ package com.example.deepakgarg.capstoneproject;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.*;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NewsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link NewsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,55 +25,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.R.attr.id;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class NewsFragment extends Fragment {
+public class SourceFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private NewsAdapter newsAdapter;
+    private SourceAdapter newsAdapter;
     ArrayList<String> id = new ArrayList<>();
     ArrayList<String> name = new ArrayList<String>();
     ArrayList<String> description = new ArrayList<String>();
     ArrayList<String> newsurl = new ArrayList<String>();
     ArrayList<String> image = new ArrayList<String>();
 
-
-    public NewsFragment() {
+    public SourceFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //FragmentManager fm = getActivity().getSupportFragmentManager();
-        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_source, container, false);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.newsrecyclerview);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.src_recyclerview);
         mRecyclerView.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(llm);
 
-        newsAdapter = new NewsAdapter(getActivity(),id,name, description, newsurl, image);
+        newsAdapter = new SourceAdapter(getActivity(), id, name, description, newsurl, image);
         mRecyclerView.setAdapter(newsAdapter);
-        data();
+
+        String source = getArguments().getString("SOURCE");
+
+        data(source);
 
         return rootView;
 
     }
 
 
-    public void data() {
+    public void data(String source) {
         try {
-            final String BASE_URL = "https://newsapi.org/v1/sources?language=en";
-
+            final String BASE_URL = "https://newsapi.org/v1/articles?source="+source+"&apiKey="+BuildConfig.API_KEY;
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
                     BASE_URL,
                     new Response.Listener<String>() {
@@ -97,17 +75,15 @@ public class NewsFragment extends Fragment {
                         public void onResponse(String response) {
                             try {
                                 JSONObject object = new JSONObject(response);
-                                String syncresponse = object.getString("sources");
+                                String syncresponse = object.getString("articles");
                                 JSONArray a1obj = new JSONArray(syncresponse);
                                 for (int j = 0; j < a1obj.length(); j++) {
                                     JSONObject obj = a1obj.getJSONObject(j);
-                                    id.add(obj.getString("id"));
-                                    name.add(obj.getString("name"));
+                                    id.add(obj.getString("author"));
+                                    name.add(obj.getString("title"));
                                     description.add(obj.getString("description"));
                                     newsurl.add(obj.getString("url"));
-                                    String s = obj.getString("urlsToLogos");
-                                    JSONObject obj2 = new JSONObject(s);
-                                    image.add(obj2.getString("small"));
+                                    image.add(obj.getString("urlToImage"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -120,15 +96,7 @@ public class NewsFragment extends Fragment {
                         Toast.makeText(getContext(), "No internet connections!", Toast.LENGTH_SHORT).show();
                     }
                 }
-            });/* {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json");
-                    return headers;
-                }
-
-            };*/
+            });
             RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             requestQueue.add(stringRequest);
         } catch (Exception e) {

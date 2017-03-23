@@ -1,8 +1,6 @@
 package com.example.deepakgarg.capstoneproject;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +12,14 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
 /**
- * Created by Deepak Garg on 22-03-2017.
+ * Created by Deepak Garg on 23-03-2017.
  */
 
-public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
+public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.MyViewHolder> {
     private Context mContext;
-    private FragmentManager fm;
-    private ArrayList<String> id,name, description, newsurl, image;
+    private ArrayList<String> id, name, description, newsurl, image;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         CardView mCardView;
@@ -37,9 +35,9 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
     }
 
 
-    public NewsAdapter(Context c, ArrayList<String> id,ArrayList<String> name,
-                       ArrayList<String> description, ArrayList<String> newsurl,
-                       ArrayList<String> image) {
+    public SourceAdapter(Context c, ArrayList<String> id, ArrayList<String> name,
+                         ArrayList<String> description, ArrayList<String> newsurl,
+                         ArrayList<String> image) {
         mContext = c;
         this.id = id;
         this.name = name;
@@ -51,7 +49,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
 
 
     @Override
-    public NewsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         MyViewHolder holder;
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
@@ -68,15 +66,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
                     .into(holder.imageView);
 
             holder.newstitle.setText(name.get(position));
-            holder.mCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                 public void onClick(View view) {
 
-                    Intent intent = new Intent(mContext,SourceActivity.class);
-                    intent.putExtra("SOURCE_NAME", id.get(holder.getAdapterPosition()));
-                    mContext.startActivity(intent);
-                }
-            });
         }
         catch (Exception e){
             e.printStackTrace();
@@ -88,4 +78,3 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
         return name.size();
     }
 }
-
