@@ -9,5 +9,14 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        Bundle bundle = getIntent().getBundleExtra("BUNDLE");
+
+        if (savedInstanceState == null) {
+            DetailsFragment myNewsFragment = new DetailsFragment();
+            myNewsFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.activity_details, myNewsFragment)
+                    .commit();
+        }
     }
 }

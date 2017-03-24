@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SourceActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
