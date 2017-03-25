@@ -1,6 +1,8 @@
 package com.example.deepakgarg.capstoneproject;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +19,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.deepakgarg.capstoneproject.data.FavContract;
+import com.example.deepakgarg.capstoneproject.data.FavDBHelper;
+import com.example.deepakgarg.capstoneproject.data.FavouritesTable;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.load;
 
@@ -70,9 +79,9 @@ public class DetailsFragment extends Fragment {
 
         final String source = getArguments().getString("source");
         final String title = getArguments().getString("name");
-        String image = getArguments().getString("image");
-        String description = getArguments().getString("description");
-        String author = getArguments().getString("author");
+        final String image = getArguments().getString("image");
+        final String description = getArguments().getString("description");
+        final String author = getArguments().getString("author");
         final String newsurl = getArguments().getString("newsurl");
 
         fab = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
@@ -135,7 +144,17 @@ public class DetailsFragment extends Fragment {
                 }
             }
         });
-
+        ArrayList<String> check = queryFavourites();
+        System.out.println(check);
+        System.out.println(newsurl);
+        if(check.contains(newsurl)) {
+            Toast.makeText(getContext(), "Yes", Toast.LENGTH_SHORT).show();
+            bookmark = true;
+        }
+        else {
+            Toast.makeText(getContext(), "No", Toast.LENGTH_SHORT).show();
+            bookmark = false;
+        }
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.app_bar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,10 +177,24 @@ public class DetailsFragment extends Fragment {
                 if(id == R.id.bookmark) {
                     if(bookmark) {
                         item.setIcon(R.mipmap.ic_launcher);
+                        FavDBHelper testInstance = new FavDBHelper();
+                        testInstance.title = title;
+                        testInstance.description = description;
+                        testInstance.author = author;
+                        testInstance.image = image;
+                        testInstance.url = newsurl;
+                        testInstance.date = "";
+
+                        try {
+                            getActivity().getContentResolver().insert(FavouritesTable.CONTENT_URI, FavouritesTable.getContentValues(testInstance, true));
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                         bookmark = false;
                     }
                     else {
                         item.setIcon(R.mipmap.ic_launcher);
+                        getActivity().getContentResolver().delete(FavouritesTable.CONTENT_URI, FavContract.COLUMN_URL + " = ?", new String[]{"" + newsurl});
                         bookmark = true;
                     }
                 }
@@ -170,5 +203,16 @@ public class DetailsFragment extends Fragment {
         });
 
         return mRootView;
+    }
+    private ArrayList<String> queryFavourites() {
+
+        Cursor c = getActivity().getContentResolver().query(FavouritesTable.CONTENT_URI, null, null, null, null);
+        List<FavDBHelper> list = FavouritesTable.getRows(c, true);
+        ArrayList<String> idList = new ArrayList<>();
+        for (FavDBHelper element : list) {
+            idList.add(element.url);
+        }
+        return idList;
+
     }
 }

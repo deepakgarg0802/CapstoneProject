@@ -22,7 +22,14 @@
         <activity
             android:name=".DetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WebActivity"></activity>
+        <activity android:name=".WebActivity" />
+        <activity android:name=".FavActivity"></activity>
+
+        <provider
+            android:name=".data.FavouritesProvider"
+            android:authorities="com.example.deepakgarg.capstoneproject"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
