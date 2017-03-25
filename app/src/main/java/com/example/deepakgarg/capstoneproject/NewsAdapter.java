@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
     private Context mContext;
+    private int mMutedColor = 0xFF333333;
     private FragmentManager fm;
     private ArrayList<String> id,name, description, newsurl, image;
 
