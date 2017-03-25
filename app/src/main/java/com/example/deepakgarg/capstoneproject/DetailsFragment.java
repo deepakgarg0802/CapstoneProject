@@ -29,8 +29,9 @@ import static java.lang.System.load;
 public class DetailsFragment extends Fragment {
 
     FloatingActionButton fab;
-    CollapsingToolbarLayout collapsingToolbarLayout;
+    net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout collapsingToolbarLayout;
     TextView textView, authorText;
+    private boolean bookmark = true;
     ImageView imageView;
 
 
@@ -38,7 +39,7 @@ public class DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static DetailsFragment newInstance(String source, String name, String image, String description, String author) {
+    public static DetailsFragment newInstance(String source, String name, String image, String description, String author,String url_news) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
         args.putString("source", source);
@@ -46,6 +47,7 @@ public class DetailsFragment extends Fragment {
         args.putString("image", image);
         args.putString("description", description);
         args.putString("author", author);
+        args.putString("newsurl", url_news);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,22 +69,42 @@ public class DetailsFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_details, container, false);
 
         final String source = getArguments().getString("source");
-        String title = getArguments().getString("name");
+        final String title = getArguments().getString("name");
         String image = getArguments().getString("image");
         String description = getArguments().getString("description");
         String author = getArguments().getString("author");
+        final String newsurl = getArguments().getString("newsurl");
 
         fab = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
-        collapsingToolbarLayout = ((CollapsingToolbarLayout) mRootView.findViewById(R.id.collapsing_toolbar_layout));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/html");
+                sharingIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, newsurl);
+                startActivity(Intent.createChooser(sharingIntent,"Share using"));
+                }
+            });
+        collapsingToolbarLayout = ((net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout) mRootView
+                .findViewById(R.id.collapsing_toolbar_layout));
         collapsingToolbarLayout.setTitle(title);
 
         authorText = (TextView) mRootView.findViewById(R.id.article_author);
-        String s = "By "+author.substring(0,1)+author.substring(1).toLowerCase();
+        String s = "By "+author.substring(0,1).toUpperCase() + author.substring(1).toLowerCase();
         authorText.setText(s);
 
         textView = (TextView) mRootView.findViewById(R.id.article_body);
         textView.setText(description);
-
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("URL", newsurl);
+                intent.putExtra("SOURCE", source);
+                startActivity(intent);
+            }
+        });
         imageView = (ImageView) mRootView.findViewById(R.id.photo);
 
         Picasso.with(getContext())
@@ -129,9 +151,19 @@ public class DetailsFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if(id == R.id.switch_layout) {
-                    Intent intent = new Intent(getActivity(),SourceActivity.class);
+                    Intent intent = new Intent(getActivity(),MainActivity.class);
                     intent.putExtra("SOURCE_NAME", source);
                     getContext().startActivity(intent);
+                }
+                if(id == R.id.bookmark) {
+                    if(bookmark) {
+                        item.setIcon(R.mipmap.ic_launcher);
+                        bookmark = false;
+                    }
+                    else {
+                        item.setIcon(R.mipmap.ic_launcher);
+                        bookmark = true;
+                    }
                 }
                 return false;
             }
