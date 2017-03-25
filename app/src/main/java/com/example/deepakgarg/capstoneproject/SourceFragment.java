@@ -7,6 +7,7 @@ import android.support.v4.*;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class SourceFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.src_recyclerview);
         mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager llm = new GridLayoutManager(getContext(), 2);
+        StaggeredGridLayoutManager llm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
         newsAdapter = new SourceAdapter(getActivity(), id, name, description, newsurl, image);

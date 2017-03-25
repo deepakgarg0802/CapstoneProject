@@ -87,9 +87,7 @@ public class DetailsFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    startActivity(new Intent(getContext(), SourceActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-                }
+                startActivity(new Intent(getActivity(), SourceActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
             }
         });
 
