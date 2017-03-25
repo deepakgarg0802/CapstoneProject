@@ -99,16 +99,17 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.MyViewHold
                     .into(holder.imageView);
             holder.newstitle.setText(name.get(position));
             final Bundle bundle = new Bundle();
-            bundle.putString("TITLE",name.get(position));
-            bundle.putString("DESCRIPTION",description.get(position));
-            bundle.putString("IMAGE", image.get(position));
+            bundle.putStringArrayList("TITLE",name);
+            bundle.putStringArrayList("DESCRIPTION",description);
+            bundle.putStringArrayList("IMAGE", image);
+            bundle.putStringArrayList("AUTHOR", id);
 
             holder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext,DetailsActivity.class);
+                    /*Intent intent = new Intent(mContext,DetailsActivity.class);
                     intent.putExtra("BUNDLE", bundle);
-                    mContext.startActivity(intent);
+                    mContext.startActivity(intent);*/
                 }
             });
         }
