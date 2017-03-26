@@ -81,6 +81,8 @@ public class DetailsFragment extends Fragment {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         MobileAds.initialize(getContext(), "ca-app-pub-8931624916046722~3758507697");
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+
     }
 
     @Override
@@ -99,7 +101,6 @@ public class DetailsFragment extends Fragment {
         final String newsurl = getArguments().getString("newsurl");
 
         Bundle bundle = new Bundle();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, source);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, newsurl);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
