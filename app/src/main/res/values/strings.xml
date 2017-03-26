@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">Capstone Project</string>
+    <string name="app_name">News Digest</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="banner_ad_unit_id">ca-app-pub-8931624916046722/5235240892</string>
 </resources>

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/bookmark"
         android:title="Bookmark"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_bookmark_white"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/switch_layout"
         android:title="switch_layout"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
 

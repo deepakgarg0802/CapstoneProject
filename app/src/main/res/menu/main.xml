@@ -4,7 +4,7 @@
 
     <item android:id="@+id/bookmark"
         android:title="Bookmark"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_bookmark_white"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
