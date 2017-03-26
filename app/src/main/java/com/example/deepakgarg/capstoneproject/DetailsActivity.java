@@ -8,10 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import me.kaelaela.verticalviewpager.VerticalViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -29,9 +31,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import me.kaelaela.verticalviewpager.VerticalViewPager;
+
 public class DetailsActivity extends AppCompatActivity {
 
-    private ViewPager mPager;
+    private com.example.deepakgarg.capstoneproject.VerticalViewPager mPager;
     private MyPagerAdapter mPagerAdapter;
     private ArrayList<String> name = new ArrayList<>();
     private ArrayList<String> description = new ArrayList<>();
@@ -48,8 +52,8 @@ public class DetailsActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_details);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        //setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -61,11 +65,16 @@ public class DetailsActivity extends AppCompatActivity {
         data(this, source);
 
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), source, name, image, description, author,news_url);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (com.example.deepakgarg.capstoneproject.VerticalViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
-        mPager.setPageMargin((int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
-        mPager.setPageMarginDrawable(new ColorDrawable(0x22000000));
+        mPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                final float normalizedposition = Math.abs(Math.abs(position) - 1);
+                page.setScaleX(normalizedposition / 2 + 0.5f);
+                page.setScaleY(normalizedposition / 2 + 0.5f);
+            }
+        });
 
     }
 
