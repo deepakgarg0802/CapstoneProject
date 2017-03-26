@@ -1,22 +1,23 @@
 package com.example.deepakgarg.capstoneproject;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.support.v7.app.AppCompatActivity;
+
+import android.view.KeyEvent;
+import android.view.View;
+import android.os.Bundle;
 import android.widget.ProgressBar;
 
 public class WebActivity extends AppCompatActivity {
 
     private WebView webView;
-    private String newsurl = "";
+    private String newsurl = "",s;
     private ActionBar actionBar;
     private ProgressBar progressBar;
 
@@ -29,7 +30,12 @@ public class WebActivity extends AppCompatActivity {
         newsurl = getIntent().getStringExtra("URL");
         String source = getIntent().getStringExtra("SOURCE");
 
-        String s = source.substring(0,1).toUpperCase() + source.substring(1).toLowerCase();
+        try {
+            s = source.substring(0, 1).toUpperCase() + source.substring(1).toLowerCase();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

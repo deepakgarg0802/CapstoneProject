@@ -5,11 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.deepakgarg.capstoneproject.data.FavDBHelper;
-import com.example.deepakgarg.capstoneproject.data.FavouritesTable;
-
-import java.util.List;
-
 public class FavActivity extends AppCompatActivity {
 
     @Override
