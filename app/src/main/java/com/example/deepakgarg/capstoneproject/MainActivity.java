@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.deepakgarg.capstoneproject.sync.NewsSyncAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.activity_main, moviesFragment)
                 .commit();
         }
-
+        NewsSyncAdapter.initializeSyncAdapter(this);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
