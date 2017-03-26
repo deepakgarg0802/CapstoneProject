@@ -1,6 +1,7 @@
 package com.example.deepakgarg.capstoneproject;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,12 +55,13 @@ import static android.R.attr.id;
 public class NewsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private NewsAdapter newsAdapter;
+    boolean mTwoPane;
     ArrayList<String> id = new ArrayList<>();
     ArrayList<String> name = new ArrayList<String>();
     ArrayList<String> description = new ArrayList<String>();
     ArrayList<String> newsurl = new ArrayList<String>();
     ArrayList<String> image = new ArrayList<String>();
-
+    StaggeredGridLayoutManager llm;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -71,14 +73,30 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //FragmentManager fm = getActivity().getSupportFragmentManager();
+        mTwoPane = getResources().getBoolean(R.bool.isTablet);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.newsrecyclerview);
         mRecyclerView.setHasFixedSize(true);
-        StaggeredGridLayoutManager llm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        if(!mTwoPane) {
+
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                llm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            } else {
+                llm = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+            }
+        }
+        else{
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                llm = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+            } else {
+                llm = new StaggeredGridLayoutManager(6, StaggeredGridLayoutManager.VERTICAL);
+            }
+        }
         mRecyclerView.setLayoutManager(llm);
 
-        newsAdapter = new NewsAdapter(getActivity(),id,name, description, newsurl, image);
+        newsAdapter = new NewsAdapter(getActivity(), id, name, description, newsurl, image, mTwoPane, fm);
         mRecyclerView.setAdapter(newsAdapter);
         data();
 

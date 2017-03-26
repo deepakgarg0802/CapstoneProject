@@ -60,7 +60,9 @@ public class DetailsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        String source = getIntent().getStringExtra("SOURCE_NAME");
+        Bundle bundle = getIntent().getBundleExtra("BUNDLE");
+        String source = bundle.getString("SOURCE_NAME");
+        System.out.println(source);
 
         data(this, source);
 
@@ -118,7 +120,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    private class MyPagerAdapter extends FragmentStatePagerAdapter {
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
         String source;
         private ArrayList<String> name = new ArrayList<>();
         private ArrayList<String> description = new ArrayList<>();

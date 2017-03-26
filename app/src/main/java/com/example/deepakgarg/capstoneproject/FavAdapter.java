@@ -2,6 +2,7 @@ package com.example.deepakgarg.capstoneproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
@@ -18,8 +19,13 @@ import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.deepakgarg.capstoneproject.data.FavContract;
+import com.example.deepakgarg.capstoneproject.data.FavDBHelper;
+import com.example.deepakgarg.capstoneproject.data.FavouritesTable;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Deepak Garg on 26-03-2017.
@@ -27,6 +33,7 @@ import java.util.ArrayList;
 
 public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
     private Context mContext;
+    private MaterialFavoriteButton btnbookmark;
     private ArrayList<String> id, name, description, newsurl, image;
     private int mMutedColor = 0xFF333333;
 
@@ -40,6 +47,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
             mCardView = (CardView) v.findViewById(R.id.fav_card_view);
             newstitle = (TextView) v.findViewById(R.id.fav_news_title);
             imageView = (ImageView) v.findViewById(R.id.fav_grid_image);
+            btnbookmark = (MaterialFavoriteButton) v.findViewById(R.id.fav_bookmark);
         }
     }
 
@@ -105,11 +113,33 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
                     mContext.startActivity(intent);
                 }
             });
+            ArrayList<String> check = queryFavourites();
+            if (check.contains(newsurl.get(position))) {
+                btnbookmark.setFavorite(true);
+            } else {
+                btnbookmark.setFavorite(false);
+            }
 
+            btnbookmark.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                @Override
+                public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                    mContext.getContentResolver().delete(FavouritesTable.CONTENT_URI, FavContract.COLUMN_URL + " = ?", new String[]{"" + newsurl.get(position)});
+                }
+            });
         }
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+    private ArrayList<String> queryFavourites() {
+
+        Cursor c = mContext.getContentResolver().query(FavouritesTable.CONTENT_URI, null, null, null, null);
+        List<FavDBHelper> list = FavouritesTable.getRows(c, true);
+        ArrayList<String> idList = new ArrayList<>();
+        for (FavDBHelper element : list) {
+            idList.add(element.url);
+        }
+        return idList;
     }
 
     @Override

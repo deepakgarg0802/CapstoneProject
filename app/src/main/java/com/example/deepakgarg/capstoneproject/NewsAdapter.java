@@ -3,6 +3,7 @@ package com.example.deepakgarg.capstoneproject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
@@ -29,8 +30,9 @@ import java.util.ArrayList;
 public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
     private Context mContext;
     private int mMutedColor = 0xFF333333;
-    private FragmentManager fm;
+    FragmentManager fm;
     private ArrayList<String> id,name, description, newsurl, image;
+    boolean mTwoPane;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         CardView mCardView;
@@ -48,14 +50,15 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
 
     public NewsAdapter(Context c, ArrayList<String> id,ArrayList<String> name,
                        ArrayList<String> description, ArrayList<String> newsurl,
-                       ArrayList<String> image) {
+                       ArrayList<String> image, boolean mTwoPane, FragmentManager fm) {
         mContext = c;
         this.id = id;
         this.name = name;
         this.description = description;
         this.newsurl = newsurl;
         this.image = image;
-
+        this.mTwoPane = mTwoPane;
+        this.fm = fm;
     }
 
 
@@ -102,8 +105,10 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
                 @Override
                  public void onClick(View view) {
 
-                    Intent intent = new Intent(mContext,DetailsActivity.class);
-                    intent.putExtra("SOURCE_NAME", id.get(holder.getAdapterPosition()));
+                    Bundle extras = new Bundle();
+                    extras.putString("SOURCE_NAME", id.get(holder.getAdapterPosition()));
+                    Intent intent = new Intent(mContext, DetailsActivity.class);
+                    intent.putExtra("BUNDLE", extras);
                     mContext.startActivity(intent);
                 }
             });
