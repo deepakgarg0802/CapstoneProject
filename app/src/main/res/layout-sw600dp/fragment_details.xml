@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -36,10 +37,9 @@
                 android:background="#fff"
                 tools:elevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/article_title"
@@ -59,6 +59,7 @@
                         style="?android:attr/textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/article_title"
                         android:paddingEnd="12dp"
                         android:paddingLeft="12dp"
                         android:paddingRight="12dp"
@@ -73,13 +74,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
+                        android:layout_below="@+id/article_author"
                         android:maxLines="5"
                         android:paddingEnd="12dp"
                         android:paddingLeft="12dp"
                         android:paddingRight="12dp"
                         android:paddingStart="12dp"
                         android:textSize="26sp" />
-                </LinearLayout>
+                    <com.google.android.gms.ads.AdView
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:padding="6dp"
+                        ads:adSize="BANNER"
+                        ads:adUnitId="@string/banner_ad_unit_id"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
 
         </FrameLayout>
