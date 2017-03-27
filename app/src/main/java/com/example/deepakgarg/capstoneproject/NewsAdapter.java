@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
     private Context mContext;
-    private int mMutedColor = 0xFF333333;
+    public static final int mMutedColor = 0xFF333333;
     FragmentManager fm;
     private ArrayList<String> id,name, description, newsurl, image;
     boolean mTwoPane;
@@ -92,8 +92,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>
                                                        boolean isFromMemoryCache, boolean isFirstResource) {
                             Bitmap bitmap = ((GlideBitmapDrawable) resource.getCurrent()).getBitmap();
                             Palette palette = Palette.generate(bitmap);
-                            int defaultColor = 0xFF333333;
-                            int color = palette.getMutedColor(defaultColor);
+                            int color = palette.getMutedColor(mMutedColor);
                             holder.newstitle.setBackgroundColor(color);
                             return false;
                         }

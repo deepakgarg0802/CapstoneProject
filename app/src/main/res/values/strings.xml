@@ -12,4 +12,9 @@
     <string name="cd_share">Share news</string>
     <string name="cd_favourites">favourites</string>
     <string name="cd_delete_all">Delete All</string>
+    <string name="base_url">https://newsapi.org/v1/articles?source=</string>
+    <string name="no_internet">No internet connections!</string>
+    <string name="app_id">ca-app-pub-8931624916046722~3758507697</string>
+    <string name="testdevice_canvas">D84F1B4EB0AF5118633D90AAD214E879</string>
+    <string name="sources_url">https://newsapi.org/v1/sources?language=en</string>
 </resources>

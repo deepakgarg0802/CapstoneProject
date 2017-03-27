@@ -68,7 +68,7 @@ public class SourceFragment extends Fragment {
 
     public void data(String source) {
         try {
-            final String BASE_URL = "https://newsapi.org/v1/articles?source="+source+"&apiKey="+BuildConfig.API_KEY;
+            final String BASE_URL = getString(R.string.base_url)+source+"&apiKey="+BuildConfig.API_KEY;
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
                     BASE_URL,
                     new Response.Listener<String>() {
@@ -94,7 +94,7 @@ public class SourceFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     if (error instanceof NoConnectionError) {
-                        Toast.makeText(getContext(), "No internet connections!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

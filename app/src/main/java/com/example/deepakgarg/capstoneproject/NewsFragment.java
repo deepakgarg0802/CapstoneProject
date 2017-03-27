@@ -107,7 +107,7 @@ public class NewsFragment extends Fragment {
 
     public void data() {
         try {
-            final String BASE_URL = "https://newsapi.org/v1/sources?language=en";
+            final String BASE_URL = getString(R.string.sources_url);
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
                     BASE_URL,
@@ -136,7 +136,7 @@ public class NewsFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     if (error instanceof NoConnectionError) {
-                        Toast.makeText(getContext(), "No internet connections!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                     }
                 }
             });/* {

@@ -80,7 +80,7 @@ public class DetailsFragment extends Fragment {
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        MobileAds.initialize(getContext(), "ca-app-pub-8931624916046722~3758507697");
+        MobileAds.initialize(getContext(), getString(R.string.app_id));
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
     }
@@ -107,7 +107,7 @@ public class DetailsFragment extends Fragment {
         mAdView = (AdView) mRootView.findViewById(R.id.adView);
 
         AdRequest adRequest = new AdRequest.Builder()
-                 .addTestDevice("D84F1B4EB0AF5118633D90AAD214E879")
+                 .addTestDevice(getString(R.string.testdevice_canvas))
                  .build();
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
