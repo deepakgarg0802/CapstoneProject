@@ -24,7 +24,7 @@
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                tools:ignore="ContentDescription" />
+                android:contentDescription="@string/cd_newsimage" />
 
             <TextView
                 android:id="@+id/article_title"
@@ -39,7 +39,7 @@
                 android:background="@color/cardview_dark_background"
                 android:fontFamily="sans-serif"
                 android:gravity="center_vertical"
-
+                android:contentDescription="@string/cd_news_title"
                 android:textColor="@android:color/white"
                 android:padding="12dp"/>
 
@@ -58,6 +58,7 @@
                     android:id="@+id/article_author"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
+                    android:contentDescription="@string/cd_author"
                     android:layout_height="wrap_content"
                     android:textStyle="bold" />
 
@@ -67,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_below="@+id/article_author"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/cd_newsbody"
                     android:ellipsize="end"
                     android:maxLines="3" />
 
@@ -105,6 +107,7 @@
                 android:id="@+id/btn_browse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/cd_browse"
                 android:layout_weight="1"
                 android:src="@drawable/ic_zoom_in_white" />
 
@@ -121,6 +124,7 @@
                 app:mfb_not_favorite_image="@drawable/ic_favorite_border_white"
                 app:mfb_padding="12"
                 app:mfb_rotation_angle="360"
+                android:contentDescription="@string/cd_bookmark"
                 app:mfb_rotation_duration="400"
                 app:mfb_type="star"
                 android:layout_marginLeft="50dp"
@@ -131,6 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/cd_share"
                 android:src="@drawable/ic_share_white" />
 
         </LinearLayout>

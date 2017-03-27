@@ -22,6 +22,7 @@
             <ImageView
                 android:id="@+id/fav_grid_image"
                 android:layout_width="match_parent"
+                android:contentDescription="@string/cd_newsimage"
                 android:layout_height="200dp"
                 android:scaleType="center" />
 
@@ -37,6 +38,7 @@
                 android:layout_width="wrap_content"
                 app:mfb_favorite_image="@drawable/ic_favorite_white"
                 app:mfb_not_favorite_image="@drawable/ic_favorite_border_white"
+                android:contentDescription="@string/cd_bookmark"
                 app:mfb_padding="12"
                 app:mfb_type="star"
                 app:mfb_animate_favorite="true"
@@ -51,6 +53,7 @@
         <TextView
             android:id="@+id/fav_news_title"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/cd_news_title"
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
