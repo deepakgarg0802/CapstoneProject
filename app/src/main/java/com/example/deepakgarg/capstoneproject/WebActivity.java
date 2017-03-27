@@ -39,7 +39,6 @@ public class WebActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(s);
         actionBar.setSubtitle(newsurl);
 

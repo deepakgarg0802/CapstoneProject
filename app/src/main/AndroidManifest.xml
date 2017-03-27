@@ -26,9 +26,17 @@
         <activity android:name=".SourceActivity" />
         <activity
             android:name=".DetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WebActivity" />
-        <activity android:name=".FavActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".WebActivity"
+            android:parentActivityName=".DetailsActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailsActivity" />
+        </activity>
+        <activity android:name=".FavActivity"/>
 
         <provider
             android:name=".data.FavouritesProvider"
