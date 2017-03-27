@@ -51,7 +51,7 @@ public class DetailsFragment extends Fragment {
     ImageView imageView, btnbrowse, btnshare;
     CardView extraView, cardView;
     AdView mAdView;
-    FirebaseAnalytics mFirebaseAnalytics;
+    //FirebaseAnalytics mFirebaseAnalytics;
     MaterialFavoriteButton btnbookmark;
     Animation slideUpAnimation, slideDownAnimation;
 
@@ -81,7 +81,7 @@ public class DetailsFragment extends Fragment {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         MobileAds.initialize(getContext(), getString(R.string.app_id));
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        //mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
     }
 
@@ -100,10 +100,10 @@ public class DetailsFragment extends Fragment {
         final String author = getArguments().getString("author");
         final String newsurl = getArguments().getString("newsurl");
 
-        Bundle bundle = new Bundle();
+        /*Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, source);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, newsurl);
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);*/
         mAdView = (AdView) mRootView.findViewById(R.id.adView);
 
         AdRequest adRequest = new AdRequest.Builder()

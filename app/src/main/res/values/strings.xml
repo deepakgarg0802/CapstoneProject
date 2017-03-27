@@ -3,6 +3,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="banner_ad_unit_id">ca-app-pub-8931624916046722/5235240892</string>
+    <string name="interstitial_full_screen">ca-app-pub-8931624916046722/5586664491</string>
     <string name="cd_newsimage">News item image</string>
     <string name="cd_news_title">News Title</string>
     <string name="cd_bookmark">Bookmark news item</string>
