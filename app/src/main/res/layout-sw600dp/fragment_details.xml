@@ -51,6 +51,10 @@
                         android:gravity="center_vertical"
                         android:padding="12dp"
                         android:textColor="@android:color/white"
+                        android:shadowColor="#000000"
+                        android:shadowDx="0.0"
+                        android:shadowDy="0.0"
+                        android:shadowRadius="2.0"
                         android:textSize="34sp"
                         android:textStyle="bold" />
 

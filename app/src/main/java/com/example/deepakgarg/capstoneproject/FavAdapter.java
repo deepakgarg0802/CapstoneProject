@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,8 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(final FavAdapter.MyViewHolder holder, final int position) {
         try{
+            dataCursor.moveToPosition(position);
+            //Log.d("image loading",dataCursor.getString(dataCursor.getColumnIndex("2")));
             Glide.clear(holder.imageView);
             Glide.with(holder.imageView.getContext())
                     .load(dataCursor.getString(dataCursor.getColumnIndex(FavouritesTable.FIELD_URLTOIMAGE)))
@@ -126,7 +129,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
             });
             final String newsUrl = dataCursor.getString(dataCursor.getColumnIndex(FavouritesTable.FIELD_URL));
             ArrayList<String> check = queryFavourites();
-            if (check.contains(newsurl)) {
+            if (check.contains(newsUrl)) {
                 btnbookmark.setFavorite(true);
             } else {
                 btnbookmark.setFavorite(false);
@@ -135,7 +138,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder> {
             btnbookmark.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
                 @Override
                 public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-                    mContext.getContentResolver().delete(FavouritesTable.CONTENT_URI, FavContract.COLUMN_URL + " = ?", new String[]{"" + newsurl});
+                    mContext.getContentResolver().delete(FavouritesTable.CONTENT_URI, FavContract.COLUMN_URL + " = ?", new String[]{"" + newsUrl});
                 }
             });
         }
