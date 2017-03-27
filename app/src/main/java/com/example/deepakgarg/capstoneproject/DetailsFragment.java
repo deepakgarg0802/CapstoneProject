@@ -94,16 +94,12 @@ public class DetailsFragment extends Fragment {
         sendUpdateIntent(getContext());
 
         final String source = getArguments().getString("source");
-        final String title = getArguments().getString("name");
-        final String image = getArguments().getString("image");
         final String description = getArguments().getString("description");
         final String author = getArguments().getString("author");
+        final String title = getArguments().getString("name");
+        final String image = getArguments().getString("image");
         final String newsurl = getArguments().getString("newsurl");
 
-        /*Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, source);
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, newsurl);
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);*/
         mAdView = (AdView) mRootView.findViewById(R.id.adView);
 
         AdRequest adRequest = new AdRequest.Builder()
@@ -119,10 +115,8 @@ public class DetailsFragment extends Fragment {
                 R.anim.slide_down);
 
         cardView = (CardView) mRootView.findViewById(R.id.card_detail);
-
-        extraView = (CardView) mRootView.findViewById(R.id.extra_view);
-
         authorTitle = (TextView) mRootView.findViewById(R.id.article_title);
+        extraView = (CardView) mRootView.findViewById(R.id.extra_view);
         authorTitle.setText(title);
 
         authorText = (TextView) mRootView.findViewById(R.id.article_author);

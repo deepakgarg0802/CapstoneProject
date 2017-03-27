@@ -38,9 +38,9 @@ public class DetailsActivity extends AppCompatActivity {
     private com.example.deepakgarg.capstoneproject.VerticalViewPager mPager;
     private MyPagerAdapter mPagerAdapter;
     private ArrayList<String> name = new ArrayList<>();
+    private ArrayList<String> author = new ArrayList<>();
     private ArrayList<String> description = new ArrayList<>();
     private ArrayList<String> image = new ArrayList<>();
-    private ArrayList<String> author = new ArrayList<>();
     private ArrayList<String> news_url = new ArrayList<>();
 
     @Override
@@ -123,8 +123,8 @@ public class DetailsActivity extends AppCompatActivity {
     public class MyPagerAdapter extends FragmentStatePagerAdapter {
         String source;
         private ArrayList<String> name = new ArrayList<>();
-        private ArrayList<String> description = new ArrayList<>();
         private ArrayList<String> image = new ArrayList<>();
+        private ArrayList<String> description = new ArrayList<>();
         private ArrayList<String> author = new ArrayList<>();
         private ArrayList<String> news_url = new ArrayList<>();
 
