@@ -6,6 +6,7 @@
         android:id="@+id/widget_item"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:contentDescription="@string/cd_newsimage"
         android:background="#9000"
         android:gravity="center" />
 
@@ -14,12 +15,13 @@
         android:layout_height="match_parent"
         android:fontFamily="sans-serif-condensed"
         android:textStyle="bold"
+        android:contentDescription="@string/cd_news_title"
         android:background="#5000"
         android:textSize="20sp"
         android:gravity="center"
         android:textColor="#fff"
         android:padding="8dp"
-        android:text="hello"
+        android:text="@string/no_title"
         android:id="@+id/widget_text"/>
 
 </FrameLayout>
