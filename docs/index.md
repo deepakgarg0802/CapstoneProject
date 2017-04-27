@@ -3,7 +3,7 @@ Stay updated with trending news from national,regional newspapers and websites. 
 
 ## Run the app
 
-<iframe src="https://appetize.io/embed/f65fqajcvuwhyvf5y7gy7q0v28?device=iphone5s&scale=50&autoplay=false&orientation=portrait&deviceColor=black" width="378px" height="400px" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://appetize.io/embed/3bxkmj1t4y0a4ztf7x3qx0y00w?device=iphone5s&scale=50&autoplay=false&orientation=portrait&deviceColor=black" width="378px" height="400px" frameborder="0" scrolling="no"></iframe>
 
 ## Intended User
 From students to professionals this app is for everyone who wishes to grasp all the news at one place. Feeds of all quality will be catered. Aspirants for government jobs can use it as a source of current affairs.
